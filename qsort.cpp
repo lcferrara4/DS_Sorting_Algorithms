@@ -9,7 +9,7 @@
 #include <algorithm>
 
 void qsort_sort(List &l, bool numeric) {
-    
+   
     std::vector<Node *> v;
 
     for(Node * curr = l.head->next; curr != NULL; curr = curr->next){
@@ -17,11 +17,14 @@ void qsort_sort(List &l, bool numeric) {
         v.push_back(curr);
 
     }
+
+    Node **nodeArray = new Node*[v.size()];
+    nodeArray = &v[0];
     if(numeric){
-        qsort(v, v.size(), sizeof(Node), void_number_compare);
+        qsort(nodeArray, v.size(), sizeof(Node), void_number_compare);
     }
     else{
-        qsort(v, v.size(),  sizeof(Node), void_string_compare);
+        qsort(nodeArray, v.size(),  sizeof(Node), void_string_compare);
     }
 
     l.head = v[0];
