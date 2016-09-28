@@ -7,7 +7,7 @@
 List::List() {
 
     Node * head = nullptr; 
-    size_t = 0; 
+    size_t size= 0; 
     
 
 }

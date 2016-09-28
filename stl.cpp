@@ -7,9 +7,9 @@
 
 void stl_sort(List &l, bool numeric) {
 
-    std::vector<Node> v; 
+    std::vector<Node *> v; 
 
-    for(Node curr = l.head; curr != NULL; curr = curr.next){
+    for(Node * curr = l.head->next; curr != NULL; curr = curr->next){
         
         v.push_back(curr); 
 
@@ -22,10 +22,10 @@ void stl_sort(List &l, bool numeric) {
     
     }
 
-    l.head = &v[0]; 
+    l.head = v[0]; 
     Node * curr = l.head; 
-    for(int i =1; i< v.size(); i++){
-        curr->next = &v[i]; 
+    for(size_t i = 1; i< v.size(); i++){
+        curr->next = v[i]; 
         curr = curr->next;  
     }
 

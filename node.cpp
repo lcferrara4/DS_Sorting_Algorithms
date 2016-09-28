@@ -1,7 +1,7 @@
 // node.cpp
 
 #include "lsort.h"
-#include <string.h> 
+#include <string> 
 #include <iostream>
 
 bool node_number_compare(const Node *a, const Node *b) {
@@ -12,22 +12,23 @@ bool node_number_compare(const Node *a, const Node *b) {
 
 bool node_string_compare(const Node *a, const Node *b) {
 
-    return (strcmp(a->string, b->string)); 
+    return (a->string > b->string); 
 }
 
 int void_number_compare(const void *a, const void *b) {
-    
-    int result = ((struct Node *)a)->number; 
-    int result2 = ((struct Node *)b)->number; 
-    return (result > result2); 
+ 
+    Node *na = *(Node **)a;
+    Node *nb = *(Node **)b;
+   
+    return (na->number > nb->number); 
 
 }
 
 int void_string_compare(const void *a, const void *b) {
-    
-    string result = ((struct Node *)a)->string; 
-    string result2 = ((struct Node *)b)->string; 
-    return (strcmp(result, result2)); 
+    Node *na = *(Node **)a;
+    Node *nb = *(Node **)b;    
+
+    return (na->string > nb->string);
 
 }
 
