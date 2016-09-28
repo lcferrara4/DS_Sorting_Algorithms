@@ -6,8 +6,8 @@
 
 List::List() {
 
-    Node * head = nullptr; 
-    size_t size= 0; 
+    head = nullptr; 
+    size= 0; 
     
 
 }
@@ -26,10 +26,10 @@ List::~List() {
 void List::push_front(const std::string &s) {
 
     try {
-        head->next = new Node{s, stoi(s), head->next}; 
+        head = new Node{s, stoi(s), head}; 
     }
     catch(const std::invalid_argument& ia){
-        head->next = new Node{s, 0, head->next}; 
+        head = new Node{s, 0, head}; 
     }
 
 

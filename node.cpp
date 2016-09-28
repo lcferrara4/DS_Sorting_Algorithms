@@ -21,6 +21,7 @@ int void_number_compare(const void *a, const void *b) {
 }
 
 int void_string_compare(const void *a, const void *b) {
+    
     Node *na = *(Node **)a;
     Node *nb = *(Node **)b;    
 
