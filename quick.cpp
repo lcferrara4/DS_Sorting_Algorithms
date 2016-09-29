@@ -14,7 +14,6 @@ Node *concatenate(Node *left, Node *right);
 
 void quick_sort(List &l, bool numeric) {
 
-    std::cout<<"anyone home"; 
 
     if(numeric){
         l.head = qsort(l.head, node_number_compare); 
@@ -26,7 +25,6 @@ void quick_sort(List &l, bool numeric) {
 }
 
 Node *qsort(Node *head, CompareFunction compare) {
-    std::cout<<"hi";  
     Node * pivot = head; 
     Node * left = nullptr;  
     Node * right = nullptr; 
@@ -37,11 +35,9 @@ Node *qsort(Node *head, CompareFunction compare) {
     }
 
     //divide
-    std::cout<<"before partition"; 
 
     partition(head, pivot, left, right, compare); 
 
-    std::cout<<"after partition";  
     //conquer
     left = qsort(left, compare); 
     right = qsort(right, compare); 
@@ -54,25 +50,17 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
     Node * curr = head; 
     Node * iterator = head; 
 
-    std::cout<<"stuck partition"; 
-
     while(iterator != nullptr && iterator->next !=nullptr){
         curr = iterator; 
+        iterator = iterator->next; 
+        std::cout<<"stuck while\n"; 
         if (compare(curr, pivot)){
-            iterator = iterator->next;  
             curr->next = head; 
             head = curr; 
         }
-        else{
-            iterator = iterator ->next;  
-            //curr->next = pivot->next; 
-            //pivot->next = curr; 
-        }
-
     }
     left = head; 
     right = pivot; 
-    
 
 }
 
