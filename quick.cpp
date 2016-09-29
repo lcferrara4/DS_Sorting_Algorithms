@@ -87,7 +87,7 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
         }
 
     }
-    iterator = nullptr;
+    //iterator = nullptr;
     left = head; 
     right = pivot; 
 
