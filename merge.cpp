@@ -14,7 +14,7 @@ Node *merge(Node *left, Node *right, CompareFunction compare);
 
 void merge_sort(List &l, bool numeric) {
 
-    dump_node(l.head); 
+    //dump_node(l.head); 
     if(numeric){
         l.head = msort(l.head, node_number_compare); 
     }
@@ -26,8 +26,8 @@ void merge_sort(List &l, bool numeric) {
 
 Node *msort(Node *head, CompareFunction compare) {
 
-    Node * left; 
-    Node * right; 
+    Node * left = head;   
+    Node * right = nullptr; 
     
     //dump_node(head); 
     
@@ -39,7 +39,7 @@ Node *msort(Node *head, CompareFunction compare) {
 
     //divide into left and right 
     split(head, left, right);  
-    
+     
     //conquer left and right sublists
     left = msort(left, compare); 
     right = msort(right, compare); 
@@ -51,14 +51,19 @@ Node *msort(Node *head, CompareFunction compare) {
 
 void split(Node *head, Node *&left, Node *&right) {
 
+    Node *temp = head;
     Node *slow_ptr = head; 
     Node  *fast_ptr = head; 
-    while(fast_ptr->next != nullptr && fast_ptr != nullptr){
+    
+    while(fast_ptr != nullptr && fast_ptr->next != nullptr){
         
-        std::cout<<"here";
+        temp = slow_ptr;
         slow_ptr = slow_ptr->next; 
         fast_ptr = fast_ptr->next->next; 
+    
     }
+    temp->next = nullptr; 
+
     left = head;     
     right = slow_ptr;  
 
