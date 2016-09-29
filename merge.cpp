@@ -33,7 +33,7 @@ Node *msort(Node *head, CompareFunction compare) {
     
     //handle base case
     if(head == nullptr || head -> next == nullptr){
-        std::cout<<"head is null"; 
+        //std::cout<<"head is null"; 
         return head; 
     }
 
@@ -85,14 +85,22 @@ Node *merge(Node *left, Node *right, CompareFunction compare) {
 
     Node * curr = head;
 
-    while(left->next || right -> next){
+    while((left != nullptr ) || (right != nullptr )){
         
-        if(right == nullptr || compare(left, right)){
+        if (right == nullptr){
+            curr->next = left; 
+            left = left->next; 
+        }
+        else if (left == nullptr){
+            curr->next = right; 
+            right = right->next; 
+        }
+        else if(compare(left, right)){
             curr->next = left; 
             left = left->next;
             
         } 
-        else if(left == nullptr || !compare(left, right)){
+        else{
             curr->next = right; 
             right = right->next; 
         }
