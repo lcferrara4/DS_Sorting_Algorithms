@@ -14,6 +14,7 @@ Node *merge(Node *left, Node *right, CompareFunction compare);
 
 void merge_sort(List &l, bool numeric) {
 
+    dump_node(l.head); 
     if(numeric){
         l.head = msort(l.head, node_number_compare); 
     }
@@ -27,9 +28,12 @@ Node *msort(Node *head, CompareFunction compare) {
 
     Node * left; 
     Node * right; 
-
+    
+    //dump_node(head); 
+    
     //handle base case
-    if(head == nullptr){// || head -> next == nullptr){
+    if(head == nullptr || head -> next == nullptr){
+        std::cout<<"head is null"; 
         return head; 
     }
 
@@ -37,9 +41,9 @@ Node *msort(Node *head, CompareFunction compare) {
     split(head, left, right);  
     
     //conquer left and right sublists
-    right = msort(right, compare); 
     left = msort(left, compare); 
-
+    right = msort(right, compare); 
+    
     //combine left and right sublists
     return merge(left, right, compare); 
 
@@ -47,8 +51,11 @@ Node *msort(Node *head, CompareFunction compare) {
 
 void split(Node *head, Node *&left, Node *&right) {
 
-    Node *slow_ptr, *fast_ptr; 
-    while(!slow_ptr && !fast_ptr && fast_ptr->next != nullptr){
+    Node *slow_ptr = head; 
+    Node  *fast_ptr = head; 
+    while(fast_ptr->next != nullptr && fast_ptr != nullptr){
+        
+        std::cout<<"here";
         slow_ptr = slow_ptr->next; 
         fast_ptr = fast_ptr->next->next; 
     }
