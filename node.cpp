@@ -5,11 +5,11 @@
 #include <iostream>
 
 bool node_number_compare(const Node *a, const Node *b) {
-    return (a->number > b->number); 
+    return (a->number < b->number); 
 }
 
 bool node_string_compare(const Node *a, const Node *b) {
-    return (a->string > b->string); 
+    return (a->string < b->string); 
 }
 
 int void_number_compare(const void *a, const void *b) {
@@ -23,9 +23,12 @@ int void_number_compare(const void *a, const void *b) {
 int void_string_compare(const void *a, const void *b) {
     
     Node *na = *(Node **)a;
-    Node *nb = *(Node **)b;    
+    Node *nb = *(Node **)b;   
 
-    return (na->string > nb->string);
+    std::string first = na->string; 
+    std::string second = nb->string; 
+
+    return (first > second);
 }
 
 //helper function outputs contents of each node from n to nullptr

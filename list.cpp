@@ -31,7 +31,7 @@ void List::push_front(const std::string &s) {
     catch(const std::invalid_argument& ia){
         head = new Node{s, 0, head}; 
     }
-
+    size++; 
 
 }
 
