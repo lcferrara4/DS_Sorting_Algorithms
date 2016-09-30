@@ -24,7 +24,7 @@ void quick_sort(List &l, bool numeric) {
 
 Node *qsort(Node *head, CompareFunction compare) {
     Node * pivot = head; 
-    Node * left = head;  
+    Node * left = nullptr;  
     Node * right = nullptr; 
     
     //base case 
@@ -37,63 +37,43 @@ Node *qsort(Node *head, CompareFunction compare) {
 
     //conquer
     left = qsort(left, compare);
+    std::cout << "in between" << "\n";
     right = qsort(right, compare); 
-
+ 
+    dump_node(left);   
     return concatenate(left, right); 
 }
 
 void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFunction compare) {
-   
-    Node * curr = head->next; 
-    Node * iterator = head->next;
-    //Node * end = nullptr;
-
-    int count =0; 
-    int count2 = 0;
     
-    while(curr != nullptr && curr->next != nullptr){//iterator != nullptr && iterator->next !=nullptr){
-        curr = iterator; 
-        iterator = iterator->next; 
+    Node * curr = head; 
+    while(curr != nullptr && curr->next != nullptr){
+        curr = curr->next; 
         
+        std::cout << curr->string << "\n";   
         if (compare(curr, pivot)){
-            if (count == 0 ){
-                curr->next = nullptr; 
-                count++; 
-            }
-            else{
-                curr->next = head;
-                count++; 
-            }
-            head = curr; 
+            curr->next = left;
+            left = curr; 
         }
         else{
-            if (count2 == 0){
-                curr->next = nullptr;
-                count2++;
-            }
-            else{
-                curr->next = pivot->next;
-                count2++;
-            }
-            pivot->next = curr;
+            curr->next = right;
+            right = curr;
         }
     }
-    left = head; 
-    right = pivot; 
-    //end->next = nullptr; 
-   // std::cout << end->string << " is end\n";
+
+    pivot->next = right;
+    right = pivot;
 }
 
 Node *concatenate(Node *left, Node *right) {
-
+    dump_node(left);
+    dump_node(right);
     std::cout<<"concat\n"; 
     Node * curr = left;
-    std::cout<<curr->string<<" is the curr node value in concat\n"; 
     while(curr!=nullptr && curr->next != nullptr){
         curr = curr->next; 
     }
-    curr = right; 
-    std::cout<<curr->string<<" is right\n";
+    curr->next = right; 
     return left; 
 }
 
