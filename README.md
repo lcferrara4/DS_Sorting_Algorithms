@@ -7,14 +7,14 @@ This is a simple implementation of the Unix [sort] utility that works on
 
 1.  STL: 
         average: nlogn
-        best: 
-        worst: 
+        best:    
+        worst: nlogn
 
 
     QSORT:
         average: nlogn
         best: 
-        worst: 
+        worst: n
 
     MERGE:
         average: nlogn
