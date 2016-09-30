@@ -29,7 +29,9 @@ Node *qsort(Node *head, CompareFunction compare) {
     
     //base case 
     if (head == nullptr || head ->next == nullptr){
+        std::cout << "base case\n";
         return head; 
+
     }
 
     //divide
@@ -37,10 +39,8 @@ Node *qsort(Node *head, CompareFunction compare) {
 
     //conquer
     left = qsort(left, compare);
-    std::cout << "in between" << "\n";
     right = qsort(right, compare); 
- 
-    dump_node(left);   
+
     return concatenate(left, right); 
 }
 
@@ -50,7 +50,6 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
     while(curr != nullptr && curr->next != nullptr){
         curr = curr->next; 
         
-        std::cout << curr->string << "\n";   
         if (compare(curr, pivot)){
             curr->next = left;
             left = curr; 
@@ -66,14 +65,12 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
 }
 
 Node *concatenate(Node *left, Node *right) {
-    dump_node(left);
-    dump_node(right);
-    std::cout<<"concat\n"; 
     Node * curr = left;
     while(curr!=nullptr && curr->next != nullptr){
         curr = curr->next; 
     }
     curr->next = right; 
+    dump_node(left);
     return left; 
 }
 
