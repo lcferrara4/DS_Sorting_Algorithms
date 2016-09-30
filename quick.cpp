@@ -14,37 +14,29 @@ Node *concatenate(Node *left, Node *right);
 
 void quick_sort(List &l, bool numeric) {
 
-    dump_node(l.head); 
     if(numeric){
         l.head = qsort(l.head, node_number_compare); 
     }
     else{
         l.head = qsort(l.head, node_string_compare); 
     }
-
 }
 
 Node *qsort(Node *head, CompareFunction compare) {
     Node * pivot = head; 
-    Node * left = nullptr;  
+    Node * left = head;  
     Node * right = nullptr; 
     
-    if(head != nullptr){
-        std::cout<<head->string<<"\n"; 
-    }
     //base case 
     if (head == nullptr || head ->next == nullptr){
-        std::cout<<"Base case\n"; 
         return head; 
     }
 
     //divide
-    dump_node(head) ;
     partition(head, pivot, left, right, compare); 
 
     //conquer
     left = qsort(left, compare);
-    std::cout<<"after right\n"; 
     right = qsort(right, compare); 
 
     return concatenate(left, right); 
@@ -52,27 +44,27 @@ Node *qsort(Node *head, CompareFunction compare) {
 
 void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFunction compare) {
     
-    Node * curr = head; 
-    Node * iterator = head;
+    Node * curr = head->next; 
+    Node * iterator = head->next;
+    //Node * end = nullptr;
+
     int count =0; 
     int count2 = 0;
-    std::cout<<"partition\n"; 
-    while(iterator != nullptr && iterator->next !=nullptr){
+    
+    while(curr != nullptr && curr->next != nullptr){//iterator != nullptr && iterator->next !=nullptr){
         curr = iterator; 
         iterator = iterator->next; 
-        std::cout<<"stuck while\n"; 
-        std::cout<<curr->string<<"\n"; 
+        
         if (compare(curr, pivot)){
             if (count == 0 ){
                 curr->next = nullptr; 
                 count++; 
             }
             else{
-            curr->next = head;
-            count++; 
+                curr->next = head;
+                count++; 
             }
             head = curr; 
-            //pivot->next = iterator;
         }
         else{
             if (count2 == 0){
@@ -85,24 +77,23 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
             }
             pivot->next = curr;
         }
-
     }
-    //iterator = nullptr;
     left = head; 
     right = pivot; 
-
+    //end->next = nullptr; 
+   // std::cout << end->string << " is end\n";
 }
 
 Node *concatenate(Node *left, Node *right) {
 
-    std::cout<<"concat"; 
-    Node * curr = left; 
-    while(curr->next != nullptr){
-        dump_node(curr); 
+    std::cout<<"concat\n"; 
+    Node * curr = left;
+    std::cout<<curr->string<<" is the curr node value in concat\n"; 
+    while(curr!=nullptr && curr->next != nullptr){
         curr = curr->next; 
     }
-    curr->next = right; 
-    
+    curr = right; 
+    std::cout<<curr->string<<" is right\n";
     return left; 
 }
 
