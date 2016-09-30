@@ -22,8 +22,6 @@ void qsort_sort(List &l, bool numeric) {
 
     }
 
-
-
     if(numeric){
         qsort(nodeArray, l.size, sizeof(Node*), void_number_compare);
     }
@@ -37,6 +35,7 @@ void qsort_sort(List &l, bool numeric) {
         nodeArray[j]->next = nodeArray[j+1]; 
     }
     nodeArray[j]->next = nullptr; 
+    delete[] nodeArray;
 }
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:

@@ -31,13 +31,16 @@ Node *qsort(Node *head, CompareFunction compare) {
     if (head == nullptr || head ->next == nullptr){
         return head; 
     }
-
+    
     //divide
-    partition(head, pivot, left, right, compare); 
+    partition(head->next, pivot, left, right, compare); 
 
     //conquer
     left = qsort(left, compare);
     right = qsort(right, compare); 
+
+    pivot->next = right;
+    right = pivot;
 
     head = concatenate(left, right); 
     return head;
@@ -52,7 +55,7 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
     Node * temp = curr;
 
     while(curr != nullptr){// && curr->next != nullptr){
-        temp = temp->next;
+        temp = curr->next;
         
         if (compare(curr, pivot)){
             curr->next = left;
@@ -64,21 +67,17 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFuncti
         }
         curr = temp; 
     }
-
-    //pivot->next = right;
-    //right = pivot;
-}
+} 
 
 Node *concatenate(Node *left, Node *right) {
     Node * curr = left;
-    while(curr!=nullptr){// && curr->next != nullptr){
-        std::cout << curr->string << " curr string\n";
+    if( curr == nullptr ){
+        return right;
+    }
+    while(curr->next != nullptr){
         curr = curr->next; 
     }
-    if( right != nullptr ){
-        curr = right; //or right 
-    }
-    dump_node(left);
+    curr->next = right; //or right 
     return left; 
 }
 
