@@ -43,7 +43,7 @@ Node *qsort(Node *head, CompareFunction compare) {
 }
 
 void partition(Node *head, Node *pivot, Node *&left, Node *&right, CompareFunction compare) {
-    
+   
     Node * curr = head->next; 
     Node * iterator = head->next;
     //Node * end = nullptr;
